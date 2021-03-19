@@ -35,8 +35,8 @@ public class Conveyor extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Top Sensor", topLightSensor.getVoltage());
-    SmartDashboard.putNumber("Bottom Sensor", bottomLightSensor.getVoltage());
+    SmartDashboard.putBoolean("Top Sensor", getTopSensor());
+    SmartDashboard.putBoolean("Bottom Sensor", getBottomSensor());
   }
 
   /**
@@ -44,16 +44,23 @@ public class Conveyor extends SubsystemBase {
    * 
    * @param Speed range -1 to 1
    */
-  public void MoveConveyor (double speed) {
+  public void moveConveyor (double speed) {
     setConveyor(speed);
     if(speed > 0) {
       setAgitator(-0.5);
     } else if(speed < 0) {
       setAgitator(0.5);
     } else {
-      setAgitator(0);
+      stop();
     }
 
+  }
+  /**
+   * Stops all motors in the Conveyor subsystem
+   */
+  public void stop(){
+    setConveyor(0);
+    setAgitator(0);
   }
 
   /**
@@ -61,7 +68,7 @@ public class Conveyor extends SubsystemBase {
    * @param speed
    * @return the actual speed of the motor
    */
-  public double setAgitator(double speed) {
+  private double setAgitator(double speed) {
     mAgitator.set(speed);
     return mAgitator.get();
   }
@@ -71,7 +78,7 @@ public class Conveyor extends SubsystemBase {
    * @param speed
    * @return the actual speed of the motor
    */
-  public double setConveyor(double speed) {
+  private double setConveyor(double speed) {
     mBeltMotor.set(speed);
     return mBeltMotor.get();
   }
