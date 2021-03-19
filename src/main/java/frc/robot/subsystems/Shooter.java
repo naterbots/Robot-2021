@@ -65,6 +65,21 @@ public class Shooter extends SubsystemBase {
     mShooterMotor.set(ControlMode.PercentOutput, speed);
   }
 
+  /**
+   * Sets the output value is in position change
+   * @param speed
+   */
+  public void setMotorRPM(double speed){
+    mShooterMotor.set(ControlMode.Velocity, speed);
+  }
+
+  /**
+   * Sets the output of the motor to 0.
+   */
+  public void stop(){
+    setMotorPercentage(0);
+  }
+
   // Getter Methods
   /**
    * Get the current RPM of the shoot motor
