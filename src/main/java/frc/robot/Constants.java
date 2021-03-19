@@ -26,7 +26,7 @@ public final class Constants {
         public static final int DRIVE_REARRIGHT = 0;                // TalonFX - CAN ID
         // Shooter
         public static final int SHOOTER = 4;             // TalonFX - CAN ID
-        public static final int FLAPPER = 10378913;      // TalonSRX - CAN ID 
+        public static final int SLIDER = 8;      // TalonSRX - CAN ID 
         // Intake
         public static final int INTAKE = 5;     // VictorSP - RIO PWM Port
         // Conveyor
