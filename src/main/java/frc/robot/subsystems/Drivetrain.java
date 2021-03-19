@@ -64,11 +64,25 @@ public class Drivetrain extends SubsystemBase {
    * @param xSpeed The robot's speed along the X axis [-1.0..1.0]. Right is positive.
    * @param ySpeed The robot's speed along the Y axis [-1.0..1.0]. Forward is positive.
    * @param zSpeed The robot's rotation rate around the Z axis [-1.0..1.0]. Clockwise is positive.
+   * @param gyroAngle The current angle reading from the gyro in degrees around the Z axis. Use this to implement field-oriented controls.
+   * @return the average percent of the motors
+   */
+  public double drive(double xSpeed, double ySpeed, double zSpeed, double gyroAngle){
+    mDrive.driveCartesian(ySpeed, xSpeed, zSpeed, gyroAngle);
+    return (mFrontLeft.get()+mFrontRight.get()+mRearLeft.get()+mRearRight.get())/4;
+  }
+
+  /**
+   * Drive method for Mecanum platform.
+   * Angles are measured clockwise from the positive X axis. The robot's speed is independent from its angle or rotation rate.
+   * 
+   * @param xSpeed The robot's speed along the X axis [-1.0..1.0]. Right is positive.
+   * @param ySpeed The robot's speed along the Y axis [-1.0..1.0]. Forward is positive.
+   * @param zSpeed The robot's rotation rate around the Z axis [-1.0..1.0]. Clockwise is positive.
    * @return the average percent of the motors
    */
   public double drive(double xSpeed, double ySpeed, double zSpeed){
-    mDrive.driveCartesian(ySpeed, xSpeed, zSpeed);
-    return (mFrontLeft.get()+mFrontRight.get()+mRearLeft.get()+mRearRight.get())/4;
+    return drive(xSpeed, ySpeed, zSpeed,0);
   }
 
   /**

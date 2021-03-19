@@ -6,3 +6,6 @@ I've finished all the subsystems. I'm not sure why @CRahne thought the need to c
 
 ## 3/19/21 12:50AM 
 My laptop is about to die. I've mostly completed all of the drivetrain commands and I wonder why there is no gyro based turn. I will need to add my own when I start work again.
+
+## 3/19/21 2:30PM
+I've started work again and have almost completed the drivetrain commands. Next I'll start the conveyor commands, it shouldn't take me too long. Assuming there is some common sense in the original code.

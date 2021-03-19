@@ -1,40 +1,38 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Drivetrain;
 
-/**
- * This command uses the Drivetrain subsystem to Drive forward or backward,
- * while correcting for rotation using the gyro.
- */
-public class DriveStraight extends CommandBase {
+public class StrafeStraight extends CommandBase {
   private Drivetrain drivetrain;
-  private double xSpeed, zMultiplier = 0.04, gyroTarget;
+  private double ySpeed, gyroTarget, zMultiplier = 0.02;
 
-  /**
-   * Creates a new DriveStraight. Drives the robot straight, using the current
-   * gyro angle to correct for rotation
-   * 
-   * @param pXSpeed Forward Speed
+  /** 
+   * Creates a new StrafeStraight.
+   * Strafes while correcting for rotation using the current gyro angle
+   * @param ySpeed strafe speed
    */
-  public DriveStraight(double xSpeed) {
+  public StrafeStraight(double ySpeed) {
     this.drivetrain = RobotContainer.drivetrain;
-    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
   }
 
-  /**
-   * Drives the robot straight, using a specified gyro angle to correct for
-   * rotation
-   * 
-   * @param pXSpeed     Forward Speed
-   * @param pGyroTarget The gyro angle to Target
+  /** 
+   * Creates a new StrafeStraight.
+   * Strafes while correcting for rotation using the current gyro angle
+   * @param ySpeed strafe speed
+   * @param gyroTarget the gyro angle to target
    */
-  public DriveStraight(double xSpeed, double gyroTarget) {
+  public StrafeStraight(double ySpeed, double gyroTarget){
     this.drivetrain = RobotContainer.drivetrain;
-    this.xSpeed = xSpeed;
+    this.ySpeed = ySpeed;
     this.gyroTarget = gyroTarget;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(drivetrain);
@@ -52,9 +50,7 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Sends the voltage to the Drivetrain motors
-    double currentAngle = drivetrain.getGyroAngle();
-    drivetrain.driveWithoutStrafe(xSpeed, -(currentAngle - gyroTarget) * zMultiplier);
+    drivetrain.drive(ySpeed, 0, (gyroTarget - drivetrain.getGyroAngle()) * zMultiplier);
   }
 
   // Called once the command ends or is interrupted.
