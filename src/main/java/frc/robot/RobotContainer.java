@@ -20,21 +20,23 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here.
-  public static Conveyor conveyor = new Conveyor();
-  public static Drivetrain drivetrain = new Drivetrain();
-  public static Intake intake = new Intake();
-  public static Shooter shooter = new Shooter();
-  public static Vision vision = new Vision();
+  public static final Conveyor conveyor = new Conveyor();
+  public static final Drivetrain drivetrain = new Drivetrain();
+  public static final Intake intake = new Intake();
+  public static final Shooter shooter = new Shooter();
+  public static final Vision vision = new Vision();
 
   // The joysticks are defined here.
-  public static Joystick opStick = new Joystick(Constants.OP_STICK_ID);
-  public static Joystick coopStick = new Joystick(Constants.COOP_STICK_ID);
+  public static final Joystick opStick = new Joystick(Constants.OP_STICK_ID);
+  public static final Joystick coopStick = new Joystick(Constants.COOP_STICK_ID);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    // Call subsystem initialize functions
+    conveyor.init();
     drivetrain.init();
     shooter.init();
   }
